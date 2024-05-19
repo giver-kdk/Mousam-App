@@ -1,7 +1,14 @@
+using Mousam_App.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// **************** Add HTTP Client via DI and set default base address ***************
+builder.Services.AddHttpClient<JSONResponseModel>(x =>
+    x.BaseAddress = new Uri("https://api.open-meteo.com")
+);
 
 var app = builder.Build();
 
