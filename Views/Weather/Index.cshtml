@@ -3,3 +3,27 @@
 *@
 @{
 }
+@model Mousam_App.Models.JSONResponseModel
+<html>
+    <head><title>Weather Data</title></head>
+    <body>
+        <form class="search__bar" asp-controller="Weather" asp-action="SetCity">
+            <input type="text" name="city" value="" placeholder="Search City Name"/>
+            <button type="submit">Search</button>
+        </form>
+        @if(@Model != null)
+        {
+            <div class="weather__container">
+                <div class="city__name">@Model.name</div>
+                <div class="temperature">Temperature: @Model.main.temp</div>
+                <div class="temperature__min">Minimum: @Model.main.temp_min</div>
+                <div class="temperature__max">Maximum: @Model.main.temp_max</div>
+                <div class="sky__status">Sky: @Model.weather[0].main</div>
+            </div>
+        }
+        else
+        {
+            <div>Data Not Found</div>
+        }
+</body>
+</html>
