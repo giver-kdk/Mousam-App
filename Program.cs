@@ -10,6 +10,9 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient<MyJsonService>(x =>
     x.BaseAddress = new Uri("https://api.openweathermap.org")
 );
+builder.Services.AddHttpClient<MyCountryService>(x =>
+    x.BaseAddress = new Uri("https://visser.io")
+);
 
 var app = builder.Build();
 

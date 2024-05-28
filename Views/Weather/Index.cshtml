@@ -1,29 +1,77 @@
 ﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+	For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
+@model Mousam_App.Models.CombinedModel
 @{
+	var imageURL = "https://openweathermap.org/img/wn/01d@2x.png";
+	var avgTemp = 0.0f;
+	if(@Model != null)
+	{
+		var imageName = @Model.JsonModelData.list[0].weather[0]?.icon ?? "01d";
+		imageURL = imageURL.Replace("01d", imageName);
+		avgTemp = (@Model.JsonModelData.list[0].main.temp_min + @Model.JsonModelData.list[0].main.temp_max)/ 2;
+	}
 }
-@model Mousam_App.Models.JSONResponseModel
+
 <html>
-    <head><title>Weather Data</title></head>
-    <body>
-        <form class="search__bar" asp-controller="Weather" asp-action="SetCity">
-            <input type="text" name="city" value="" placeholder="Search City Name"/>
-            <button type="submit">Search</button>
-        </form>
-        @if(@Model != null)
+<head>
+	<title>Weather Data</title>
+</head>
+<body>
+	<form class="search__bar" asp-controller="Weather" asp-action="SetCity">
+		<input type="text" name="city" value="" placeholder="Search City Name" />
+		<button type="submit">Search</button>
+	</form>
+	@if(@Model != null)
         {
-            <div class="weather__container">
-                <div class="city__name">@Model.name</div>
-                <div class="temperature">Temperature: @Model.main.temp</div>
-                <div class="temperature__min">Minimum: @Model.main.temp_min</div>
-                <div class="temperature__max">Maximum: @Model.main.temp_max</div>
-                <div class="sky__status">Sky: @Model.weather[0].main</div>
-            </div>
+	<div class="weather__container">
+		<div>
+			<div class="city__name text-primary_text">
+				<span><i class="fa fa-map-marker" aria-hidden="true"></i></span>
+				@Model.JsonModelData.city.name, @Model.CountryModelData.country
+			</div>
+			<div id="time__box" class="temperature text-primary"></div>
+		</div>
+		<div>
+			<div class="temperature text-primary">@avgTemp °C</div>
+			<div>
+				<div class="sky__status text-primary">@Model.JsonModelData.list[0].weather[0].main</div>
+				<img class="sky__image" src="@imageURL" />
+			</div>
+		</div>
+
+		<div class="weather__details">
+				<div class="precipitation__info">
+					<i class="fa fa-umbrella" aria-hidden="true"></i>
+						<!-- Render 0 if no value exist -->
+						<p>@(Model.JsonModelData.list[0].rain?._3h ?? 0) mm</p>
+					<p>Precipitation</p>
+				</div>
+				<div class="humidity__info">
+					<i class="fa fa-tint" aria-hidden="true"></i>
+					<p>@(Model.JsonModelData.list[0].main?.humidity ?? 0)%</p>
+					<p>Humidity</p>
+				</div>
+				<div class="wind__info">
+					<i class="fa-solid fa-wind"></i>
+					<p>@(Model.JsonModelData.list[0].wind?.speed ?? 0) km/h</p>
+					<p>Wind Speed</p>
+				</div>
+		</div>
+	</div>
         }
         else
         {
-            <div>Data Not Found</div>
+			<div>Loading...</div>
         }
+	<script>
+		// jQuery code to print current data and time of specified place every seconds
+		$(document).ready(() => {
+			setInterval(() => {
+				const formattedDate = moment().utcOffset(@Model.JsonModelData.city.timezone/60).format('ddd, D MMMM YYYY HH:mm');
+				$("#time__box").text(formattedDate)
+			}, 1000);
+		});
+	</script>
 </body>
 </html>
