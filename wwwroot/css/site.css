@@ -1,3 +1,50 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.error__alert
+{
+/*	display: none;*/
+	position: absolute;
+	width: 500px;
+	margin-top: 0.5rem;
+	left: 50%;
+	transform: translateX(-50%) translateY(-100px);
+	opacity: 0;
+}
+.error__alert.active {
+	/*	display: block;*/
+	transform: translateX(-50%) translateY(-100px);
+	opacity: 1;
+	animation-name: slideup;
+	animation-duration: 4s;
+	animation-timing-function: ease-in-out;
+	animation-delay: 0s;
+}
+
+@keyframes slideup
+{
+	0% {
+		transform: translateX(-50%) translateY(-100px);
+		opacity: 0;
+	}
+	10%
+	{
+		transform: translateX(-50%) translateY(0px);
+		opacity: 1;
+	}
+	50% {
+		transform: translateX(-50%) translateY(0px);
+		opacity: 1;
+	}
+	80% {
+		transform: translateX(-50%) translateY(0px);
+		opacity: 1;
+	}
+	100%
+	{
+		opacity: 0;transform: translateX(-50%) translateY(-100px);
+		opacity: 0;
+	}
+}

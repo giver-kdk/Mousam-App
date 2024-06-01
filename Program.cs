@@ -13,6 +13,8 @@ builder.Services.AddHttpClient<MyJsonService>(x =>
 builder.Services.AddHttpClient<MyCountryService>(x =>
     x.BaseAddress = new Uri("https://visser.io")
 );
+builder.Services.AddSession();
+
 
 var app = builder.Build();
 
@@ -30,6 +32,8 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.UseSession();
 
 app.MapControllerRoute(
     name: "default",

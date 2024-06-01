@@ -1,4 +1,5 @@
 ﻿using Mousam_App.Models;
+using System.Text.Json;
 
 namespace Mousam_App.Controllers.Service
 {
@@ -26,7 +27,7 @@ namespace Mousam_App.Controllers.Service
             }
             catch(Exception ex)
             {
-                return null;
+                throw ex;
             }
         }
     }

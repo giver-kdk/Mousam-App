@@ -1,7 +1,7 @@
 {
     "scripts": {
-        "css:build": "npx tailwindcss -i ./wwwroot/css/site.css -o ./wwwroot/css/styles.css --minify",
-        "watch": "npx tailwindcss -i ./wwwroot/css/site.css -o ./wwwroot/css/styles.css --minify --watch"
+        "css:build": "npx tailwindcss -i ./wwwroot/css/site.css -o ./wwwroot/css/output.css --minify",
+        "watch": "npx tailwindcss -i ./wwwroot/css/site.css -o ./wwwroot/css/output.css --minify --watch"
     },
     "dependencies": {
         "tailwindcss": "^3.4.3"
