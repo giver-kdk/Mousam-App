@@ -42,7 +42,7 @@
 	@{
 		string errorStatus = ViewBag.ApiDataError == true ? "active" : "";
 	}
-	<div class="error__alert @{@errorStatus} bg-red-100 border border-red-400 px-4 py-3 rounded relative " role="alert">
+	<div class="error__alert @{@errorStatus} bg-red-100 border border-red-400 px-4 py-3 rounded relative z-2" role="alert">
 		<strong class="font-bold text-red-700">Data Not Found!</strong>
 		<span class="block sm:inline">Unable to fetch the weather data.</span>
 		<span class="close__icon absolute top-0 bottom-0 right-0 px-4 py-3">
