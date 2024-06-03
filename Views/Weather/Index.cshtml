@@ -38,7 +38,7 @@
 <head>
 	<title>Weather Data</title>
 </head>
-<body class="flex flex-col justify-center items-center w-screen">
+<body class="flex flex-col justify-center items-center w-full">
 	@{
 		string errorStatus = ViewBag.ApiDataError == true ? "active" : "";
 	}
@@ -49,15 +49,15 @@
 			<svg class="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z" /></svg>
 		</span>
 	</div>
-	<form class="search__bar hidden absolute rounded-lg bg-white p-2 flex justify-center items-center mt-2" asp-controller="Weather" asp-action="Index" method="post">
-		<input class="bg-gray-50 rounded-md p-1 px-3" type="text" name="city" value="" placeholder="Search City Name" />
-		<button class="bg-primary rounded-md p-1 px-3 text-white font-medium" type="submit">Search</button>
+	<form id="search" class="search__bar absolute z-10 rounded-lg bg-white p-3 flex justify-center items-center gap-2 mt-4" asp-controller="Weather" asp-action="Index" method="post">
+		<input class="search__bar--input bg-gray-100 rounded-md p-1 px-3" type="text" name="city" value="" placeholder="Search City Name" />
+		<button id="search__btn" class="bg-primary rounded-md p-1 px-3 text-white font-medium" type="submit">Search</button>
 	</form>
 	@if(@Model != null)
         {
-			<div class="weather__box ">
+			<div class="weather__box">
 			<div class="weather__container flex flex-col gap-2 rounded-b-3xl">
-					<div class="flex flex-col gap-1 justify-center items-center mt-4 pt-4">
+				<div id="location__search" class="flex flex-col gap-1 justify-center items-center mt-4 pt-4">
 						<div class="city__name text-primary_text text-2xl font-semibold opacity-90">
 							<span><i class="fa fa-map-marker" aria-hidden="true"></i></span>
 							@Model.JsonModelData.city.name
@@ -65,7 +65,7 @@
 							{
 								<span>, @Model.CountryModelData.country</span>
 							}
-							</div>
+						</div>
 						<div id="time__box" class="text-primary text-lg font-normal opacity-60">
 								@{
 									var dateResult = forecastDate.ToString("ddd, dd MMMM HH:mm");
@@ -179,5 +179,22 @@
         {
 			<div>Loading...</div>
         }
+		<script>
+			document.addEventListener("DOMContentLoaded", function () {
+				let searcher = document.getElementById("location__search");
+				let searchBar = document.getElementById("search");
+				let searchBtn = document.getElementById("search__btn");
+
+				searcher.addEventListener("click", function () {
+					searchBar.classList.add("active");
+				});
+
+				searchBtn.addEventListener("click", function () {
+					// Add your search logic here (optional)
+					searchBar.classList.remove("active");
+					console.log("Search button clicked (add your search functionality here)"); // Example placeholder
+				});
+			});
+		</script>
 </body>
 </html>

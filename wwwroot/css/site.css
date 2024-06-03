@@ -19,15 +19,25 @@ body {
 	box-shadow: 0px 10px 20px #5155EC40;
 }
 .weather__box {
-		background-color: rgba(232, 230, 255, 0.6);
+	background-color: rgba(232, 230, 255, 0.6);
 }
-.search__bar
-{
+.search__bar {
 	left: 50%;
-	transform: translateX(-50%);
+	transform: translateX(-50%) translateY(-100px);
+	opacity: 50%;
+	transition: all 0.15s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+/*		display: none;*/
 }
-.temperature
+.search__bar.active {
+/*		display: block;*/
+	transform: translateX(-50%) translateY(0px);
+	opacity: 100%;
+}
+.search__bar--input:focus
 {
+	outline: 1px solid #5155EC40;
+}
+.temperature {
 	font-size: 12rem;
 	line-height: 10rem;
 }
@@ -81,3 +91,4 @@ body {
 		opacity: 0;
 	}
 }
+
