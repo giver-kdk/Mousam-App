@@ -37,7 +37,7 @@ namespace Mousam_App.Controllers
                 try{
 			        // ****** Await for asynchronous operation ***********
 			        var weatherResult = await _jsonService.GetAsyncWeather(cityName);
-			        var countryResult = await _myCountryService.GetAsyncCountry();
+			        var countryResult = await _myCountryService.GetAsyncCountry(weatherResult?.city?.country ?? "NP");
 
 				    combinedModel.JsonModelData = weatherResult;
 				    combinedModel.CountryModelData = countryResult;
