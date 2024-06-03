@@ -2,12 +2,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
 .wrapper {
-	padding: 35px;
+	padding: 1.5rem 1rem;
 	position: relative;
-	overflow-x: hidden;
+/*	overflow-x: hidden;*/
 	max-width: 600px;
-	background: #ffffff;
-	border-radius: 13px;
+/*	background: #ffffff;*/
 }
 
 	.wrapper .icon {
@@ -22,13 +21,14 @@
 .icon:first-child {
 	left: 0;
 	display: none;
-	background: linear-gradient(90deg, #fff 70%, transparent);
+/*	background: linear-gradient(90deg, #fff 70%, transparent);*/
 }
 
 .icon:last-child {
 	right: 0;
 	justify-content: flex-end;
-	background: linear-gradient(-90deg, #fff 70%, transparent);
+
+/*	background: linear-gradient(-90deg, #000 70%, transparent);*/
 }
 
 .icon i {
@@ -39,10 +39,12 @@
 	text-align: center;
 	line-height: 55px;
 	border-radius: 50%;
+	background: #efedfb;
+	z-index: 2;
 }
 
 	.icon i:hover {
-		background: #efedfb;
+		background: rgba(239, 237, 251, 0.8);
 	}
 
 .icon:first-child i {
@@ -57,9 +59,9 @@
 	display: flex;
 	gap: 12px;
 	list-style: none;
-	overflow-x: hidden;
+/*	overflow-x: hidden;*/
 	scroll-behavior: smooth;
-	width: 500px;
+/*	width: 500px;*/
 }
 
 .tabs-box.dragging {
@@ -72,20 +74,19 @@
 	font-size: 1.18rem;
 	white-space: nowrap;
 	color: white;
-	/*  background: #f5f4fd;*/
+/*	background: #f5f4fd;*/
+	background-image: linear-gradient(to left, #f5f4fd99, #CFD3F9);
+	border: 1px solid white;
 	padding: 10px;
 	border-radius: 25px;
-	/*  border: 1px solid;*/
-	/*  height: 130px;*/
-	min-width: 60px;
-	/*  overflow-wrap: break-word;*/
-	/*  overflow-x: hidden;*/
-	/*  word-wrap:break-word;*/
+	width: 45%;
+	filter: drop-shadow(-5px 10px 10px #5372F060) brightness(1);
 	text-wrap: wrap;
+	transition: all 0.15s ease-in;
 }
 
 	.tabs-box .tab:hover {
-		background: #efedfb;
+		filter: drop-shadow(-5px 10px 10px #5372F060) brightness(1.04);
 	}
 
 .tabs-box.dragging .tab {
@@ -95,10 +96,12 @@
 
 .tabs-box .tab.active {
 	color: #fff;
-	background: #5372F0;
 	border-color: transparent;
+	background-image: linear-gradient(to right, #5372F0, #7F7EFE);
 }
-
+.tabs-box .tab.active div:last-child {
+	color: white;
+}
 .date__slider {
-	background-image: linear-gradient(135deg, rgba(255, 255, 255, .4), rgba(255, 255, 255, .1) 45%, rgba(255, 255, 255, .07) 72%);
+/*	background-image: linear-gradient(135deg, rgba(255, 255, 255, .4), rgba(255, 255, 255, .1) 45%, rgba(255, 255, 255, .07) 72%);*/
 }

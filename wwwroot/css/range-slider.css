@@ -1,7 +1,9 @@
 ﻿@charset "UTF-8";
 
 .range__slider {
-	margin-bottom: 1.5rem;
+	margin-top: 1rem;
+	margin-bottom: 4rem;
+	border-bottom-left-radius: 10px;
 }
 
 #form-wrapper {
@@ -45,6 +47,7 @@ form {
 			left: 50%;
 			transform: translate(-50%, -50%);
 			background: #000;
+			border: 1.5px solid #5155EC;
 		}
 
 		form #weather-time-slider input, form #weather-time-slider label {
@@ -74,9 +77,10 @@ form {
 				left: 50%;
 				padding-top: 10px;
 				transform: translate(-50%, 45px);
-				font-size: 14px;
+				font-size: 12px;
+				color: #454395;
 				letter-spacing: 0.4px;
-				font-weight: 400;
+				font-weight: 500;
 				white-space: nowrap;
 				opacity: 0.85;
 				transition: all 0.15s ease-in-out;
@@ -88,9 +92,8 @@ form {
 				left: 50%;
 				top: 50%;
 				transform: translate(-50%, -50%);
-				width: 30px;
-				height: 30px;
-				border: 2px solid #000;
+				width: 20px;
+				height: 20px;
 				background: #fff;
 				border-radius: 50%;
 				pointer-events: none;
@@ -101,6 +104,7 @@ form {
 				z-index: 1;
 				cursor: pointer;
 				transition: all 0.15s ease-in-out;
+				border: 2px solid #5155EC;
 			}
 
 			form #weather-time-slider label:hover::after {
@@ -117,6 +121,7 @@ form {
 			}
 
 			form #weather-time-slider input:checked + label::after {
+				border: 1.5px solid #5155EC;
 				border-width: 4px;
 				transform: translate(-50%, -50%) scale(0.75);
 			}
@@ -170,6 +175,7 @@ form {
 			border: 2px solid #fff;
 			opacity: 0;
 			z-index: 2;
+			background-color: #5155EC;
 		}
 
 	form:valid #weather-time-slider input + label::before {

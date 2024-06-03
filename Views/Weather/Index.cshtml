@@ -4,7 +4,7 @@
 @model Mousam_App.Models.CombinedModel
 @{
 	var imgSuffix = "https://openweathermap.org/img/wn/";
-	var imgPrefix = "@2x.png";
+	var imgPrefix = "@4x.png";
 	var imageNamePrimary = "01d";
 	var imageNameSecondary = "01d";
 	var imageUrlPrimary = imgSuffix + imageNamePrimary + imgPrefix;
@@ -38,7 +38,7 @@
 <head>
 	<title>Weather Data</title>
 </head>
-<body>
+<body class="flex flex-col justify-center items-center w-screen">
 	@{
 		string errorStatus = ViewBag.ApiDataError == true ? "active" : "";
 	}
@@ -49,130 +49,135 @@
 			<svg class="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z" /></svg>
 		</span>
 	</div>
-	<form class="search__bar" asp-controller="Weather" asp-action="Index" method="post">
-		<input type="text" name="city" value="" placeholder="Search City Name" />
-		<button type="submit">Search</button>
+	<form class="search__bar hidden absolute rounded-lg bg-white p-2 flex justify-center items-center mt-2" asp-controller="Weather" asp-action="Index" method="post">
+		<input class="bg-gray-50 rounded-md p-1 px-3" type="text" name="city" value="" placeholder="Search City Name" />
+		<button class="bg-primary rounded-md p-1 px-3 text-white font-medium" type="submit">Search</button>
 	</form>
 	@if(@Model != null)
         {
-	<div class="weather__container">
-		<div>
-			<div class="city__name text-primary_text">
-				<span><i class="fa fa-map-marker" aria-hidden="true"></i></span>
-				@Model.JsonModelData.city.name
-				@if (@Model.JsonModelData.city.name != @Model.CountryModelData.country)
-				{
-					<span>, @Model.CountryModelData.country</span>
-				}
-				</div>
-			<div id="time__box" class="temperature text-primary">
-					@{
-						var dateResult = forecastDate.ToString("ddd, dd MMMM HH:mm");
-					}
-					@dateResult
-			</div>
-		</div>
-		<div>
-			<div class="temperature text-primary">@avgTemp °C</div>
-			<div>
-				<div class="sky__status text-primary">@Model.JsonModelData.list[selectedList].weather[0].main</div>
-				<img class="sky__image" src="@imageUrlPrimary" />
-			</div>
-		</div>
-
-		<div class="weather__details">
-				<div class="precipitation__info">
-					<i class="fa fa-umbrella" aria-hidden="true"></i>
-						<!-- Render 0 if no value exist -->
-						<p>@(Model.JsonModelData.list[selectedList].rain?._3h ?? 0) mm</p>
-					<p>Precipitation</p>
-				</div>
-				<div class="humidity__info">
-					<i class="fa fa-tint" aria-hidden="true"></i>
-					<p>@(Model.JsonModelData.list[selectedList].main?.humidity ?? 0)%</p>
-					<p>Humidity</p>
-				</div>
-				<div class="wind__info">
-					<i class="fa-solid fa-wind"></i>
-					<p>@(Model.JsonModelData.list[selectedList].wind?.speed ?? 0) km/h</p>
-					<p>Wind Speed</p>
-				</div>
-		</div>
-		<div class="range__slider">
-				<div id="form-wrapper">
-					<form asp-controller="Weather" asp-action="GetTimelyWeather" method="GET">
-						<div id="weather-time-slider">
-							@for(int i = 0; i < 8; i++)
+			<div class="weather__box ">
+			<div class="weather__container flex flex-col gap-2 rounded-b-3xl">
+					<div class="flex flex-col gap-1 justify-center items-center mt-4 pt-4">
+						<div class="city__name text-primary_text text-2xl font-semibold opacity-90">
+							<span><i class="fa fa-map-marker" aria-hidden="true"></i></span>
+							@Model.JsonModelData.city.name
+							@if (@Model.JsonModelData.city.name != @Model.CountryModelData.country)
 							{
+								<span>, @Model.CountryModelData.country</span>
+							}
+							</div>
+						<div id="time__box" class="text-primary text-lg font-normal opacity-60">
+								@{
+									var dateResult = forecastDate.ToString("ddd, dd MMMM HH:mm");
+								}
+								@dateResult
+						</div>
+					</div>
+					<div class="mt-5 flex flex-col gap-5">
+						<div class="pl-16 temperature text-primary font-bold text-center opacity-90">@(Math.Round(avgTemp))°</div>
+						<div class="">
+							<div class="pl-16 flex justify-center items-start text-center sky__status text-primary text-3xl font-medium">
+								<span class="">
+									@Model.JsonModelData.list[selectedList].weather[0].main
+								</span>
+								<div class="w-48 flex justify-center items-center">
+									<img class="absolute sky__image w-44  grayscale brightness-200" src="@imageUrlPrimary" />
+									<img class="absolute sky__image-2 w-44" src="@imageUrlPrimary" />
+								</div>
+							</div>
+						</div>
+					</div>
+
+						<div class="weather__details flex justify-center items-center gap-6 mt-6 p-4 w-11/12 rounded-full m-auto bg-white">
+							<div class="text-primary_text flex flex-col justify-center items-center gap-1 precipitation__info">
+								<i class="fa fa-umbrella opacity-90" aria-hidden="true"></i>
+									<!-- Render 0 if no value exist -->
+									<p class="font-medium">@(Model.JsonModelData.list[selectedList].rain?._3h ?? 0) mm</p>
+								<p class="text-xs font-semibold opacity-70">Precipitation</p>
+							</div>
+							<div class="text-primary_text flex flex-col justify-center items-center gap-1 humidity__info">
+								<i class="fa fa-tint opacity-90" aria-hidden="true"></i>
+								<p class="font-medium">@(Model.JsonModelData.list[selectedList].main?.humidity ?? 0)%</p>
+								<p class="text-xs font-semibold opacity-70">Humidity</p>
+							</div>
+							<div class="text-primary_text flex flex-col justify-center items-center gap-1 wind__info">
+								<i class="fa-solid fa-wind opacity-90"></i>
+								<p class="font-medium">@(Model.JsonModelData.list[selectedList].wind?.speed ?? 0) km/h</p>
+								<p class="text-xs font-semibold opacity-70">Wind Speed</p>
+							</div>
+					</div>
+					<div class="range__slider">
+							<div id="form-wrapper">
+								<form asp-controller="Weather" asp-action="GetTimelyWeather" method="GET">
+									<div id="weather-time-slider">
+										@for(int i = 0; i < 8; i++)
+										{
+											{
+												bool isSelectedTime = (forecastDate.Hour == i * 3);
+												if(isSelectedTime)
+												{
+													selectedTime = i;
+												}
+											}
+											<input type="radio" name="weather-time" id="@(i+1)" value="@(i+1)" required @(forecastDate.Hour == i * 3 ? "checked" : "")>
+											<label 
+												for="@(i+1)" 
+												data-weather-time="@(string.Format("{0:D2}", (i * 3))):00"
+												onclick="location.href='@Url.Action("Index", "Weather", new {listIndex = selectedList, timeIndex = i - currentTimeIndex, doReuse = true})'"
+											></label>
+										}
+										<div id="weather-time-pos"></div>
+									</div>
+								</form>
+							</div>
+					</div>
+				</div>
+				<p class="text-md text-primary_text font-semibold opacity-80 mt-5 m-auto w-10/12 drop-shadow-md">5-Day Forecasts</p>
+
+				<div class="date__slider">
+					<div class="wrapper">
+						<ul class="tabs-box flex flex-wrap justify-center items-start">
+							@for (int i = 0; i < Model.JsonModelData.list.Length; i++)
+							{
+								var apiDate = DateTime.Parse(Model.JsonModelData.list[i].dt_txt);
+								var isSameDay = (latestDate.Year == apiDate.Year) && (latestDate.Month == apiDate.Month)
+								&& (latestDate.Day == apiDate.Day);
+								// Generate image URL
+								imageNameSecondary = @Model.JsonModelData.list[i].weather[0]?.icon ?? "01d";
+								imageUrlSecondary = imgSuffix + imageNameSecondary + imgPrefix;
+
+								bool isSelectedDay = (forecastDate.Year == apiDate.Year) && (forecastDate.Month == apiDate.Month)
+								&& (forecastDate.Day == apiDate.Day);
+
+								if (!isSameDay)
 								{
-									bool isSelectedTime = (forecastDate.Hour == i * 3);
-									if(isSelectedTime)
+									<li class="bg-glass_bg_2 border-glass_border flex justify-center items-center tab @(isSelectedDay ? "active" : "")"
+										onclick="location.href='@Url.Action("Index", "Weather", new {listIndex = i, doReuse = true})'">
+										<div class="text-center text-sm font-semibold text-white drop-shadow-md">
+											@apiDate.ToString("ddd").ToUpper()
+										</div>
+										<img src="@imageUrlSecondary" href="Sky Status" class="drop-shadow-lg w-12" />
+									<div class="text-center text-sm font-semibold drop-shadow-md">
+											@(Math.Round(Model.JsonModelData.list[i].main.temp_max)) °
+										</div>
+									<div class="text-center text-sm font-semibold text-primary opacity-70 ml-1 drop-shadow-md">
+											@(Math.Round(Model.JsonModelData.list[i].main.temp_min)) °
+										</div>
+									</li>
 									{
-										selectedTime = i;
+										latestDate = apiDate;
+										selectedList = 1;
 									}
 								}
-								<input type="radio" name="weather-time" id="@(i+1)" value="@(i+1)" required @(forecastDate.Hour == i * 3 ? "checked" : "")>
-								<label 
-									for="@(i+1)" 
-									data-weather-time="@(string.Format("{0:D2}", (i * 3))):00"
-									onclick="location.href='@Url.Action("Index", "Weather", new {listIndex = selectedList, timeIndex = i - currentTimeIndex, doReuse = true})'"
-								></label>
 							}
-							<div id="weather-time-pos"></div>
-						</div>
-					</form>
+						</ul>
+					</div>
 				</div>
-		</div>
-
-		<div class="date__slider">
-			<div class="wrapper">
-				<div class="icon"><i id="left" class="fa-solid fa-angle-left"></i></div>
-				<ul class="tabs-box">
-					@for(int i = 0; i < Model.JsonModelData.list.Length; i++)
-					{
-							var apiDate = DateTime.Parse(Model.JsonModelData.list[i].dt_txt);
-							var isSameDay = (latestDate.Year == apiDate.Year) && (latestDate.Month == apiDate.Month)
-							&& (latestDate.Day == apiDate.Day);
-							// Generate image URL
-							imageNameSecondary = @Model.JsonModelData.list[i].weather[0]?.icon ?? "01d";
-							imageUrlSecondary = imgSuffix + imageNameSecondary + imgPrefix;
-
-							bool isSelectedDay = (forecastDate.Year == apiDate.Year) && (forecastDate.Month == apiDate.Month)
-							&& (forecastDate.Day == apiDate.Day);
-
-							if(!isSameDay)
-							{
-								<li 
-									class="bg-glass_bg_2 border-glass_border flex flex-col justify-center items-center tab @(isSelectedDay ? "active" : "")"
-									onclick="location.href='@Url.Action("Index", "Weather", new {listIndex = i, doReuse = true})'">
-									<div class="text-center text-sm font-semibold text-white">
-										@apiDate.ToString("ddd").ToUpper()
-									</div>
-									<img src="@imageUrlSecondary" href="Sky Status" class="drop-shadow-lg w-12"/>
-									<div class="text-center text-sm font-semibold">
-										@(Math.Round(Model.JsonModelData.list[i].main.temp_max)) °
-									</div>
-									<div class="text-center text-sm font-semibold">
-										@(Math.Round(Model.JsonModelData.list[i].main.temp_min)) °
-									</div>
-								</li>
-								{
-									latestDate = apiDate;
-									selectedList = 1;
-								}
-							}
-						}
-				</ul>
-				<div class="icon"><i id="right" class="fa-solid fa-angle-right"></i></div>
 			</div>
-		</div>
-	</div>
         }
         else
         {
 			<div>Loading...</div>
         }
-	<script src="~/js/date-slider-script.js"></script>
-
 </body>
 </html>
