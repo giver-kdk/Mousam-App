@@ -55,4 +55,8 @@
 		display: block;
 		box-shadow: -5px 10px 15px #45439530;
 	}
+	.error__alert
+	{
+		width: 40vw;
+	}
 }
