@@ -6,8 +6,23 @@
 {
 	border: 2px solid red;
 }
+/* Google Map CSS */
+.map__box {
+	display: none;
+	width: 50vw;
+	margin: 1rem;
+	margin-left: 0;
+	border-radius: 15px;
+	filter: hue-rotate(-45deg);
+}
+.map__box:focus {
+	outline: 2px solid transparent;
+	border: 2px solid transparent;
+}
+/* Weather App CSS */
 body {
-	border: 2px solid white;
+	/*	border: 2px solid white;*/
+	user-select: none;
 	background-image: url('../assets/gradient-bg.jpg');
 	background-position: right;
 	background-size: cover;
@@ -21,12 +36,37 @@ body {
 .weather__box {
 	background-color: rgba(232, 230, 255, 0.6);
 }
+.city__name {
+	background-color: rgba(255, 255, 255, 0.5);
+	border-radius: 15px;
+	transition: all 0.1s ease-out;
+}
+.city__name:hover {
+	background-color: rgba(255, 255, 255, 0.8);
+	cursor: pointer;
+}
 .search__bar {
 	left: 50%;
 	transform: translateX(-50%) translateY(-100px);
-	opacity: 50%;
-	transition: all 0.15s cubic-bezier(0.55, 0.055, 0.675, 0.19);
-/*		display: none;*/
+	/*	background-color: rgba(255, 255, 255, 0.7);*/
+	background-image: linear-gradient(to left, #f5f4fd99, #CFD3F9);
+	border: 1px solid white;
+	box-shadow: 0px 10px 20px #5155EC10;
+	filter: blur(1) drop-shadow(0px 10px 10px #5155EC60);
+	transition: all 0.2s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+	/*		display: none;*/
+}
+.search__bar input
+{
+	background-color: white;
+	height: 40px;
+	width: 60vw;
+/*	border: 1px solid #5155EC40;*/
+}
+.search__bar button {
+	background-image: linear-gradient(to right, #5372F0, #7F7EFE);
+	color: white;
+	height: 40px;
 }
 .search__bar.active {
 /*		display: block;*/
@@ -50,9 +90,10 @@ body {
 .error__alert {
 	/*	display: none;*/
 	position: absolute;
-	width: 500px;
-	margin-top: 0.5rem;
+	width: 90vw;
+	margin-top: 1rem;
 	left: 50%;
+	z-index: 2;
 	transform: translateX(-50%) translateY(-100px);
 	opacity: 0;
 }
@@ -91,4 +132,3 @@ body {
 		opacity: 0;
 	}
 }
-

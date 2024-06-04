@@ -80,6 +80,7 @@
 	padding: 10px;
 	border-radius: 25px;
 	width: 45%;
+	max-width: 200px;
 	filter: drop-shadow(-5px 10px 10px #5372F060) brightness(1);
 	text-wrap: wrap;
 	transition: all 0.15s ease-in;

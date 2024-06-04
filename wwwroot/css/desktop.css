@@ -1,0 +1,58 @@
+﻿/* CSS for Desktop Mode */
+@media screen and (min-width: 480px) {
+	body::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-image: inherit;
+		background-size: cover;
+		transform: scaleX(-1); /* Flip horizontally here */
+		z-index: -1;
+	}
+
+	.app__container {
+		width: 100vw;
+		height: 100vh;
+		background-color: rgba(232, 230, 255, 0.6);
+	}
+
+	.weather__box {
+		/*		width: 100% !important;*/
+		margin: 1rem;
+		border-radius: 15px;
+		display: flex;
+		flex-direction: row;
+		box-shadow: 5px 5px 15px #45439530;
+		background-color: rgba(232, 230, 255, 0.3);
+	}
+
+	.weather__container {
+		border-radius: 15px;
+		box-shadow: 10px 0px 20px #5155EC40;
+		border-bottom: 1px solid transparent;
+		border-right: 2.5px solid white;
+		background-color: rgba(255, 255, 255, 0.4);
+	}
+	.search__bar input {
+		width: 200px;
+	}
+	.search__bar
+	{
+		filter: drop-shadow(0px 5px 10px #45439540);
+	}
+	.tabs-box {
+		flex-direction: column;
+	}
+
+	.tabs-box .tab {
+		width: 100%;
+	}
+
+	.map__box {
+		display: block;
+		box-shadow: -5px 10px 15px #45439530;
+	}
+}

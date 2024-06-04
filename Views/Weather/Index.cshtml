@@ -50,43 +50,48 @@
 		</span>
 	</div>
 	<form id="search" class="search__bar absolute z-10 rounded-lg bg-white p-3 flex justify-center items-center gap-2 mt-4" asp-controller="Weather" asp-action="Index" method="post">
-		<input class="search__bar--input bg-gray-100 rounded-md p-1 px-3" type="text" name="city" value="" placeholder="Search City Name" />
-		<button id="search__btn" class="bg-primary rounded-md p-1 px-3 text-white font-medium" type="submit">Search</button>
+		<input class="search__bar--input bg-gray-100 rounded-md p-1 px-3 w-8/12" type="text" name="city" value="" placeholder="Search City Name" />
+		<button id="search__btn" class="bg-primary rounded-md p-1 px-3 text-white font-medium mr-4" type="submit">Search</button>
+		<span class="close__icon absolute top-1 right-1">
+			<svg class="fill-current w-5 text-primary" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z" /></svg>
+		</span>
 	</form>
 	@if(@Model != null)
         {
-			<div class="weather__box">
-			<div class="weather__container flex flex-col gap-2 rounded-b-3xl">
-				<div id="location__search" class="flex flex-col gap-1 justify-center items-center mt-4 pt-4">
-						<div class="city__name text-primary_text text-2xl font-semibold opacity-90">
-							<span><i class="fa fa-map-marker" aria-hidden="true"></i></span>
-							@Model.JsonModelData.city.name
-							@if (@Model.JsonModelData.city.name != @Model.CountryModelData.country)
-							{
-								<span>, @Model.CountryModelData.country</span>
-							}
+			<div class="app__container flex flex-row justify-center w-full">
+				<div class="weather__box">
+				<div class="weather__container flex flex-col gap-2 rounded-b-3xl">
+					<div class="data__section">
+						<div id="location__search" class="flex flex-col gap-1 justify-center items-center m-auto mt-4">
+								<div class="city__name text-primary_text text-2xl font-semibold opacity-90 p-3">
+									<span><i class="fa fa-map-marker" aria-hidden="true"></i></span>
+									@Model.JsonModelData.city.name
+									@if (@Model.JsonModelData.city.name != @Model.CountryModelData.country)
+									{
+										<span>, @Model.CountryModelData.country</span>
+									}
+								</div>
+								<div id="time__box" class="text-primary text-lg font-normal opacity-60">
+										@{
+											var dateResult = forecastDate.ToString("ddd, dd MMMM HH:mm");
+										}
+										@dateResult
+								</div>
 						</div>
-						<div id="time__box" class="text-primary text-lg font-normal opacity-60">
-								@{
-									var dateResult = forecastDate.ToString("ddd, dd MMMM HH:mm");
-								}
-								@dateResult
-						</div>
-					</div>
-					<div class="mt-5 flex flex-col gap-5">
-						<div class="pl-16 temperature text-primary font-bold text-center opacity-90">@(Math.Round(avgTemp))°</div>
-						<div class="">
-							<div class="pl-16 flex justify-center items-start text-center sky__status text-primary text-3xl font-medium">
-								<span class="">
-									@Model.JsonModelData.list[selectedList].weather[0].main
-								</span>
-								<div class="w-48 flex justify-center items-center">
-									<img class="absolute sky__image w-44  grayscale brightness-200" src="@imageUrlPrimary" />
-									<img class="absolute sky__image-2 w-44" src="@imageUrlPrimary" />
+						<div class="mt-5 flex flex-col gap-5">
+							<div class="pl-16 temperature text-primary font-bold text-center opacity-90">@(Math.Round(avgTemp))°</div>
+							<div class="">
+								<div class="pl-16 flex justify-center items-start text-center sky__status text-primary text-3xl font-medium">
+									<span class="">
+										@Model.JsonModelData.list[selectedList].weather[0].main
+									</span>
+									<div class="w-48 flex justify-center items-center">
+										<img class="absolute sky__image w-44  grayscale brightness-200" src="@imageUrlPrimary" />
+										<img class="absolute sky__image-2 w-44" src="@imageUrlPrimary" />
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
 
 						<div class="weather__details flex justify-center items-center gap-6 mt-6 p-4 w-11/12 rounded-full m-auto bg-white">
 							<div class="text-primary_text flex flex-col justify-center items-center gap-1 precipitation__info">
@@ -105,10 +110,10 @@
 								<p class="font-medium">@(Model.JsonModelData.list[selectedList].wind?.speed ?? 0) km/h</p>
 								<p class="text-xs font-semibold opacity-70">Wind Speed</p>
 							</div>
-					</div>
-					<div class="range__slider">
+						</div>
+						<div class="range__slider">
 							<div id="form-wrapper">
-								<form asp-controller="Weather" asp-action="GetTimelyWeather" method="GET">
+								<form class="range__form" asp-controller="Weather" asp-action="GetTimelyWeather" method="GET">
 									<div id="weather-time-slider">
 										@for(int i = 0; i < 8; i++)
 										{
@@ -130,71 +135,66 @@
 									</div>
 								</form>
 							</div>
+						</div>
+						</div>
 					</div>
-				</div>
-				<p class="text-md text-primary_text font-semibold opacity-80 mt-5 m-auto w-10/12 drop-shadow-md">5-Day Forecasts</p>
+					<div class="option__section">
+						<p class="text-md text-primary_text font-semibold opacity-80 mt-5 m-auto w-10/12 drop-shadow-md">6-Day Forecasts</p>
 
-				<div class="date__slider">
-					<div class="wrapper">
-						<ul class="tabs-box flex flex-wrap justify-center items-start">
-							@for (int i = 0; i < Model.JsonModelData.list.Length; i++)
-							{
-								var apiDate = DateTime.Parse(Model.JsonModelData.list[i].dt_txt);
-								var isSameDay = (latestDate.Year == apiDate.Year) && (latestDate.Month == apiDate.Month)
-								&& (latestDate.Day == apiDate.Day);
-								// Generate image URL
-								imageNameSecondary = @Model.JsonModelData.list[i].weather[0]?.icon ?? "01d";
-								imageUrlSecondary = imgSuffix + imageNameSecondary + imgPrefix;
-
-								bool isSelectedDay = (forecastDate.Year == apiDate.Year) && (forecastDate.Month == apiDate.Month)
-								&& (forecastDate.Day == apiDate.Day);
-
-								if (!isSameDay)
-								{
-									<li class="bg-glass_bg_2 border-glass_border flex justify-center items-center tab @(isSelectedDay ? "active" : "")"
-										onclick="location.href='@Url.Action("Index", "Weather", new {listIndex = i, doReuse = true})'">
-										<div class="text-center text-sm font-semibold text-white drop-shadow-md">
-											@apiDate.ToString("ddd").ToUpper()
-										</div>
-										<img src="@imageUrlSecondary" href="Sky Status" class="drop-shadow-lg w-12" />
-									<div class="text-center text-sm font-semibold drop-shadow-md">
-											@(Math.Round(Model.JsonModelData.list[i].main.temp_max)) °
-										</div>
-									<div class="text-center text-sm font-semibold text-primary opacity-70 ml-1 drop-shadow-md">
-											@(Math.Round(Model.JsonModelData.list[i].main.temp_min)) °
-										</div>
-									</li>
+						<div class="date__slider">
+							<div class="wrapper">
+								<ul class="tabs-box flex flex-wrap justify-center items-start">
+									@for (int i = 0; i < Model.JsonModelData.list.Length; i++)
 									{
-										latestDate = apiDate;
-										selectedList = 1;
+										var apiDate = DateTime.Parse(Model.JsonModelData.list[i].dt_txt);
+										var isSameDay = (latestDate.Year == apiDate.Year) && (latestDate.Month == apiDate.Month)
+										&& (latestDate.Day == apiDate.Day);
+										// Generate image URL
+										imageNameSecondary = @Model.JsonModelData.list[i].weather[0]?.icon ?? "01d";
+										imageUrlSecondary = imgSuffix + imageNameSecondary + imgPrefix;
+
+										bool isSelectedDay = (forecastDate.Year == apiDate.Year) && (forecastDate.Month == apiDate.Month)
+										&& (forecastDate.Day == apiDate.Day);
+
+										if (!isSameDay)
+										{
+											<li class="bg-glass_bg_2 border-glass_border flex justify-center items-center tab @(isSelectedDay ? "active" : "")"
+												onclick="location.href='@Url.Action("Index", "Weather", new {listIndex = i, doReuse = true})'">
+												<div class="text-center text-sm font-semibold text-white drop-shadow-md">
+													@apiDate.ToString("ddd").ToUpper()
+												</div>
+												<img src="@imageUrlSecondary" href="Sky Status" class="drop-shadow-lg w-12" />
+												<div class="text-center text-sm font-semibold drop-shadow-md">
+														@(Math.Round(Model.JsonModelData.list[i].main.temp_max)) °
+													</div>
+												<div class="text-center text-sm font-semibold text-primary opacity-70 ml-1 drop-shadow-md">
+														@(Math.Round(Model.JsonModelData.list[i].main.temp_min)) °
+												</div>
+											</li>
+											{
+												latestDate = apiDate;
+												selectedList = 1;
+											}
+										}
 									}
-								}
-							}
-						</ul>
+								</ul>
+							</div>
+						</div>
 					</div>
+
 				</div>
+				<!-- Google Map -->
+			@{
+				var lat = Model.JsonModelData.city.coord.lat;
+				var lon = Model.JsonModelData.city.coord.lon;
+			}
+			<iframe class="map__box" src="https://maps.google.com/maps?q=loc:@(lat),@(lon)&z=13&ie=UTF8&iwloc=&amp;output=embed" allowfullscreen></iframe>
+
 			</div>
         }
         else
         {
 			<div>Loading...</div>
         }
-		<script>
-			document.addEventListener("DOMContentLoaded", function () {
-				let searcher = document.getElementById("location__search");
-				let searchBar = document.getElementById("search");
-				let searchBtn = document.getElementById("search__btn");
-
-				searcher.addEventListener("click", function () {
-					searchBar.classList.add("active");
-				});
-
-				searchBtn.addEventListener("click", function () {
-					// Add your search logic here (optional)
-					searchBar.classList.remove("active");
-					console.log("Search button clicked (add your search functionality here)"); // Example placeholder
-				});
-			});
-		</script>
 </body>
 </html>

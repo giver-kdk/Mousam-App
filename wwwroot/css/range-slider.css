@@ -13,18 +13,18 @@
 	align-items: center;
 }
 
-form {
+.range__form {
 	width: 90%;
 	max-width: 500px;
 }
 
-	form #form-title {
+	.range__form #form-title {
 		margin-top: 0;
 		font-weight: 400;
 		text-align: center;
 	}
 
-	form #weather-time-slider {
+	.range__form #weather-time-slider {
 		display: flex;
 		flex-direction: row;
 		align-content: stretch;
@@ -37,7 +37,7 @@ form {
 		user-select: none;
 	}
 
-		form #weather-time-slider::before {
+		.range__form #weather-time-slider::before {
 			content: " ";
 			position: absolute;
 			height: 2px;
@@ -50,7 +50,7 @@ form {
 			border: 1.5px solid #5155EC;
 		}
 
-		form #weather-time-slider input, form #weather-time-slider label {
+		.range__form #weather-time-slider input, .range__form #weather-time-slider label {
 			box-sizing: border-box;
 			flex: 1;
 			-webkit-user-select: none;
@@ -60,7 +60,7 @@ form {
 			cursor: pointer;
 		}
 
-		form #weather-time-slider label {
+		.range__form #weather-time-slider label {
 			display: inline-block;
 			position: relative;
 			width: 20%;
@@ -71,7 +71,7 @@ form {
 			user-select: none;
 		}
 
-			form #weather-time-slider label::before {
+			.range__form #weather-time-slider label::before {
 				content: attr(data-weather-time);
 				position: absolute;
 				left: 50%;
@@ -86,7 +86,7 @@ form {
 				transition: all 0.15s ease-in-out;
 			}
 
-			form #weather-time-slider label::after {
+			.range__form #weather-time-slider label::after {
 				content: " ";
 				position: absolute;
 				left: 50%;
@@ -107,62 +107,62 @@ form {
 				border: 2px solid #5155EC;
 			}
 
-			form #weather-time-slider label:hover::after {
+			.range__form #weather-time-slider label:hover::after {
 				transform: translate(-50%, -50%) scale(1.25);
 			}
 
-		form #weather-time-slider input {
+		.range__form #weather-time-slider input {
 			display: none;
 		}
 
-			form #weather-time-slider input:checked + label::before {
+			.range__form #weather-time-slider input:checked + label::before {
 				font-weight: 800;
 				opacity: 1;
 			}
 
-			form #weather-time-slider input:checked + label::after {
+			.range__form #weather-time-slider input:checked + label::after {
 				border: 1.5px solid #5155EC;
 				border-width: 4px;
 				transform: translate(-50%, -50%) scale(0.75);
 			}
 
-			form #weather-time-slider input:checked ~ #weather-time-pos {
+			.range__form #weather-time-slider input:checked ~ #weather-time-pos {
 				opacity: 1;
 			}
 
-			form #weather-time-slider input:checked:nth-child(1) ~ #weather-time-pos {
+			.range__form #weather-time-slider input:checked:nth-child(1) ~ #weather-time-pos {
 				left: 6.2%;
 			}
 
-			form #weather-time-slider input:checked:nth-child(3) ~ #weather-time-pos {
+			.range__form #weather-time-slider input:checked:nth-child(3) ~ #weather-time-pos {
 				left: 18.7%;
 			}
 
-			form #weather-time-slider input:checked:nth-child(5) ~ #weather-time-pos {
+			.range__form #weather-time-slider input:checked:nth-child(5) ~ #weather-time-pos {
 				left: 31.2%;
 			}
 
-			form #weather-time-slider input:checked:nth-child(7) ~ #weather-time-pos {
+			.range__form #weather-time-slider input:checked:nth-child(7) ~ #weather-time-pos {
 				left: 43.7%;
 			}
 
-			form #weather-time-slider input:checked:nth-child(9) ~ #weather-time-pos {
+			.range__form #weather-time-slider input:checked:nth-child(9) ~ #weather-time-pos {
 				left: 56.2%;
 			}
 
-			form #weather-time-slider input:checked:nth-child(11) ~ #weather-time-pos {
+			.range__form #weather-time-slider input:checked:nth-child(11) ~ #weather-time-pos {
 				left: 68.7%;
 			}
 
-			form #weather-time-slider input:checked:nth-child(13) ~ #weather-time-pos {
+			.range__form #weather-time-slider input:checked:nth-child(13) ~ #weather-time-pos {
 				left: 81.2%;
 			}
 
-			form #weather-time-slider input:checked:nth-child(15) ~ #weather-time-pos {
+			.range__form #weather-time-slider input:checked:nth-child(15) ~ #weather-time-pos {
 				left: 93.8%;
 			}
 
-		form #weather-time-slider #weather-time-pos {
+		.range__form #weather-time-slider #weather-time-pos {
 			display: block;
 			position: absolute;
 			top: 50%;
@@ -178,17 +178,17 @@ form {
 			background-color: #5155EC;
 		}
 
-	form:valid #weather-time-slider input + label::before {
+	.range__form:valid #weather-time-slider input + label::before {
 		transform: translate(-50%, 45px) scale(0.9);
 		transition: all 0.15s linear;
 	}
 
-	form:valid #weather-time-slider input:checked + label::before {
+	.range__form:valid #weather-time-slider input:checked + label::before {
 		transform: translate(-50%, 45px) scale(1.1);
 		transition: all 0.15s linear;
 	}
 
-	form + button {
+	.range__form + button {
 		display: block;
 		position: relative;
 		margin: 56px auto 0;
@@ -211,28 +211,28 @@ form {
 		cursor: pointer;
 	}
 
-		form + button:hover {
+		.range__form + button:hover {
 			background: #5155EC;
 			color: #fff;
 		}
 
-			form + button:hover:active {
+			.range__form + button:hover:active {
 				transform: scale(0.9);
 			}
 
-		form + button:focus {
+		.range__form + button:focus {
 			background: #5155EC;
 			border-color: #5155EC;
 			color: #fff;
 			pointer-events: none;
 		}
 
-			form + button:focus::before {
+			.range__form + button:focus::before {
 				-webkit-animation: spin 1s linear infinite;
 				animation: spin 1s linear infinite;
 			}
 
-		form + button::before {
+		.range__form + button::before {
 			display: inline-block;
 			width: 0;
 			opacity: 0;
@@ -243,7 +243,7 @@ form {
 			transform: rotate(0deg);
 		}
 
-	form:invalid + button {
+	.range__form:invalid + button {
 		pointer-events: none;
 		opacity: 0.25;
 	}
