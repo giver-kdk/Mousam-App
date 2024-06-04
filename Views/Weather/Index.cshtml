@@ -42,6 +42,9 @@
 	@{
 		string errorStatus = ViewBag.ApiDataError == true ? "active" : "";
 	}
+	<div class="loader__box w-full h-full absolute">
+		<img class="loader__screen absolute m-auto mt-4" src="/assets/loader.gif" alt="Loader Pic" />
+	</div>
 	<div class="error__alert @{@errorStatus} bg-red-100 border border-red-400 px-4 py-3 rounded relative z-2" role="alert">
 		<strong class="font-bold text-red-700">Data Not Found!</strong>
 		<span class="block sm:inline">Unable to fetch the weather data.</span>
@@ -188,6 +191,7 @@
 				var lat = Model.JsonModelData.city.coord.lat;
 				var lon = Model.JsonModelData.city.coord.lon;
 			}
+
 			<iframe class="map__box" src="https://maps.google.com/maps?q=loc:@(lat),@(lon)&z=13&ie=UTF8&iwloc=&amp;output=embed" allowfullscreen></iframe>
 
 			</div>

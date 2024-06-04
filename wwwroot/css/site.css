@@ -6,6 +6,26 @@
 {
 	border: 2px solid red;
 }
+
+.loader__box
+{
+	background-color: #ffffff50;
+	opacity: 0;
+	z-index: 0;
+	transition: all 0.2s ease-in-out;
+}
+.loader__box.active {
+	z-index: 10;
+	opacity: 1;
+}
+.loader__screen {
+	left: 50%;
+	top: 50%;
+	transform: translateX(-50%) translateY(-50%);
+	border-radius: 50%;
+	width: 80px;
+	filter: drop-shadow(0 0 10px #5155EC30) hue-rotate(50deg);
+}
 /* Google Map CSS */
 .map__box {
 	display: none;
@@ -14,6 +34,10 @@
 	margin-left: 0;
 	border-radius: 15px;
 	filter: hue-rotate(-45deg);
+	background-image: url('../assets/map-vector.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
 }
 .map__box:focus {
 	outline: 2px solid transparent;

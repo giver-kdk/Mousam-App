@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
+    let loader = document.querySelector(".loader__box");
     let searcher = document.getElementById("location__search");
     let search = document.getElementById("search");
     let closeSearch = document.querySelector("#search .close__icon");
@@ -13,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
     searchBtn.addEventListener("click", function () {
         // Add your search logic here (optional)
         search.classList.remove("active");
+        loader.classList.add("active");
     });
 
     closeSearch.addEventListener("click", function () {
