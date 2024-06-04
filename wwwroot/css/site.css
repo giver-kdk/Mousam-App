@@ -59,14 +59,14 @@ body {
 .search__bar input
 {
 	background-color: white;
-	height: 40px;
+	height: 50px;
 	width: 60vw;
 /*	border: 1px solid #5155EC40;*/
 }
 .search__bar button {
 	background-image: linear-gradient(to right, #5372F0, #7F7EFE);
 	color: white;
-	height: 40px;
+	height: 50px;
 }
 .search__bar.active {
 /*		display: block;*/
